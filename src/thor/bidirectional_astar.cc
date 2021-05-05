@@ -208,8 +208,7 @@ inline bool BidirectionalAStar::ExpandInner(baldr::GraphReader& graphreader,
   if (FORWARD) {
     // Why is is_dest false?
     // We have to consider next cases:
-    //  1) At least one step of the reverse search was done -> the direct search never does not
-    //  process the destination edge.
+    //  1) At least one step of reverse search was done -> forward search will never reach the destination edge.
     //  2) There were no steps of the reverse search -> the destination
     //  edge is a connection edge.
     // We can set is_dest incorrectly in the second case, but it is the rare case.
