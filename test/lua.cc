@@ -105,6 +105,7 @@ TEST(Lua, NumberDoublePeriod) {
 }
 } // namespace
 
+// TODO: add tests.
 // TODO: sweet jesus add more tests of this class!
 
 int main(int argc, char* argv[]) {

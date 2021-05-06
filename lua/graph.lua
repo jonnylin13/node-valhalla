@@ -1661,7 +1661,8 @@ function nodes_proc (kv, nokeys)
   end
 
   --normalize a few tags that we care about
-  local access = access[kv["access"]] or "true"
+  local init_access = access[kv["access"]]
+  local access = init_access or "true"
 
   if (kv["impassable"] == "yes" or (kv["access"] == "private" and (kv["emergency"] == "yes" or kv["service"] == "emergency_access"))) then
     access = "false"
@@ -1815,6 +1816,22 @@ function nodes_proc (kv, nokeys)
       emergency = emergency_tag or 16
       hov = hov_tag or 0
     end
+  end
+
+  --if gate = true and no access was specified use only acceptable modes.
+  if gate == true and init_access == nil then
+    print("Access ", init_access, " Gate ", gate)
+    auto = auto_tag or 0
+    truck = truck_tag or 0
+    bus = bus_tag or 0
+    taxi = taxi_tag or 0
+    foot = foot_tag or 0
+    wheelchair = wheelchair_tag or 0
+    bike = bike_tag or 0
+    moped = moped_tag or 0
+    motorcycle = motorcycle_tag or 0
+    emergency = emergency_tag or 0
+    hov = hov_tag or 0
   end
 
   --if nothing blocks access at this node assume access is allowed.
