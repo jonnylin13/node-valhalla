@@ -1,7 +1,8 @@
 ####################################################################
 # base image contains all the dependencies we need to build the code
-FROM valhalla/valhalla:build-3.1.0 as builder
+FROM jonnylin13/node-valhalla:build-3.1.1 as builder
 MAINTAINER Kevin Kreiser <kevinkreiser@gmail.com>
+MAINTAINER Jonny Lin <jonnylin@um.co>
 
 # get the code into the right place and prepare to build it
 WORKDIR /usr/local/src/valhalla
@@ -12,7 +13,7 @@ RUN mkdir build
 
 # configure the build with symbols turned on so that crashes can be triaged
 WORKDIR /usr/local/src/valhalla/build
-RUN cmake .. -DCMAKE_BUILD_TYPE=RelWithDebInfo
+RUN cmake .. -DCMAKE_BUILD_TYPE=Release -DENABLE_NODE_BINDINGS=On
 RUN make all -j$(nproc)
 RUN make install
 
@@ -20,7 +21,7 @@ RUN make install
 WORKDIR /usr/local/src
 RUN cd valhalla && echo "https://github.com/valhalla/valhalla/tree/$(git rev-parse HEAD)" > ../valhalla_version
 RUN for f in valhalla/locales/*.json; do cat ${f} | python3 -c 'import sys; import json; print(json.load(sys.stdin)["posix_locale"])'; done > valhalla_locales
-RUN rm -rf valhalla
+# RUN rm -rf valhalla
 
 # the binaries are huge with all the symbols so we strip them but keep the debug there if we need it
 WORKDIR /usr/local/bin

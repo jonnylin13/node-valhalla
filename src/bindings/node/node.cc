@@ -88,7 +88,8 @@ public:
 
     Napi::Function func =
         DefineClass(my_env, "Actor",
-                    {InstanceMethod("route", &Actor::Route), InstanceMethod("locate", &Actor::Locate),
+                    {InstanceMethod("route", &Actor::Route), 
+                     InstanceMethod("locate", &Actor::Locate),
                      InstanceMethod("matrix", &Actor::Matrix),
                      InstanceMethod("optimizedRoute", &Actor::OptimizedRoute),
                      InstanceMethod("isochrone", &Actor::Isochrone),

@@ -1,7 +1,7 @@
 FROM i386/ubuntu:18.04
 
 ENV NVM_DIR /usr/local/nvm
-ENV NODE_VERSION 14.15.1
+ENV NODE_VERSION 10.22.0
 
 ADD install-shared-deps.sh .
 RUN bash ./install-shared-deps.sh
