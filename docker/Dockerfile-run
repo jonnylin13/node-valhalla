@@ -1,8 +1,7 @@
 ####################################################################
 # base image contains all the dependencies we need to build the code
-FROM jonnylin13/node-valhalla:build-3.1.1 as builder
+FROM 168369983848.dkr.ecr.us-west-2.amazonaws.com/node-valhalla:build-latest as builder
 MAINTAINER Kevin Kreiser <kevinkreiser@gmail.com>
-MAINTAINER Jonny Lin <jonnylin@um.co>
 
 # get the code into the right place and prepare to build it
 WORKDIR /usr/local/src/valhalla
